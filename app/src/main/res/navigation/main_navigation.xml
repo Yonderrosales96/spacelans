@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/listOfferFragments">
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.test.spacelens.view.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="product"
+            app:argType="com.test.spacelens.model.Products" />
+    </fragment>
+    <fragment
+        android:id="@+id/listOfferFragments"
+        android:name="com.test.spacelens.view.ListOfferFragments"
+        android:label="fragment_list_offer_fragments"
+        tools:layout="@layout/fragment_list_offer_fragments" >
+        <action
+            android:id="@+id/action_listOfferFragments_to_detailFragment"
+            app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_listOfferFragments_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.test.spacelens.view.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" >
+        <action
+            android:id="@+id/action_mapsFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+        <argument
+            android:name="productos"
+            app:argType="com.test.spacelens.model.Products[]" />
+    </fragment>
+</navigation>
