@@ -13,7 +13,8 @@ import com.test.spacelens.R
 import com.test.spacelens.adapter.RecyclerVIewProductAdapter
 import com.test.spacelens.databinding.FragmentListOfferFragmentsBinding
 import com.test.spacelens.model.Products
-import com.test.spacelens.utils.toastLong
+import com.test.spacelens.utils.LoadingDialog
+import com.test.spacelens.utils.setLightStatusBar
 import com.test.spacelens.viewmodel.ListProductViewModel
 import kotlinx.android.synthetic.main.fragment_list_offer_fragments.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -34,6 +35,8 @@ class ListOfferFragments : Fragment(),KoinComponent {
     private val producViewModel : ListProductViewModel by viewModel()
     private lateinit var binding : FragmentListOfferFragmentsBinding
     private lateinit var listOfProducts : List<Products>
+    private lateinit var loadingDialog: LoadingDialog
+
 
     override fun onCreateView(
         inflater: LayoutInflater, @Nullable container: ViewGroup?,
@@ -45,10 +48,14 @@ class ListOfferFragments : Fragment(),KoinComponent {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setLightStatusBar()
+        loadingDialog = LoadingDialog(requireContext())
         producViewModel.getProductsAsync(1.0,1.0)
         binding.ivMaps.setOnClickListener {
             findNavController().navigate(ListOfferFragmentsDirections.actionListOfferFragmentsToMapsFragment(listOfProducts.toTypedArray()))
         }
+
         observe()
     }
 
@@ -61,11 +68,13 @@ class ListOfferFragments : Fragment(),KoinComponent {
                 })
             })
             onError.observe(viewLifecycleOwner, Observer {
-                context?.toastLong(it)
+
             })
             loadingState.observe(viewLifecycleOwner, Observer {
-                context?.toastLong(it.toString())
-
+                if (it)
+                    loadingDialog.show()
+                else
+                    loadingDialog.dismiss()
             })
         }
     }

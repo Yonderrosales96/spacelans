@@ -6,6 +6,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:background="#f7f8fa"
         android:layout_height="match_parent">
     <FrameLayout
         android:id="@+id/toolbarLayout"
@@ -37,9 +38,10 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:gravity="center"
-                    android:textSize="18sp"
+                    android:textSize="22sp"
                     android:textColor="@color/white"
-                    android:text="Login"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:text="List of products"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

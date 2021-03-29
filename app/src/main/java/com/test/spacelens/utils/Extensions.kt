@@ -4,6 +4,8 @@ import android.content.Context
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 
 /**
  * Context Extensions
@@ -18,6 +20,14 @@ inline fun <T> justTry(block: () -> T) = try {
 } catch (e: Throwable) {
 }
 
+fun Fragment.setLightStatusBar() {
+    val window = activity?.window
+    window?.apply {
+        statusBarColor = ContextCompat.getColor(requireContext(), android.R.color.transparent)
+        decorView.systemUiVisibility =
+            View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+    }
+}
 
 /**
  * Logger extension

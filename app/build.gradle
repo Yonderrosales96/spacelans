@@ -79,6 +79,9 @@ dependencies {
 
     implementation 'com.google.maps.android:maps-utils-ktx:2.4.0'
 
+    //spinkit
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+
 
 
 
